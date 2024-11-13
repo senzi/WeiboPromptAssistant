@@ -1,13 +1,14 @@
 // ==UserScript==
 // @name         申请微博中译中
 // @namespace    https://github.com/SomiaWhiteRing/chinese2chinese4weibo
-// @version      0.1
+// @version      0.2
 // @description  将微博内容翻译成更易理解的中文
 // @author       WhiteRing
-// @match        https://weibo.com/*
+// @match        https://*.weibo.com/*
 // @grant        GM_setValue
 // @grant        GM_getValue
 // @grant        GM_xmlhttpRequest
+// @license      MIT
 // ==/UserScript==
 
 (function () {
@@ -33,7 +34,7 @@
   function createSettingsDialog() {
     const dialog = document.createElement('div');
     dialog.innerHTML = `
-          <div style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); 
+          <div style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
                       background: white; padding: 20px; border-radius: 8px; z-index: 9999;
                       box-shadow: 0 0 10px rgba(0,0,0,0.3);">
               <h3>设置</h3>
@@ -58,7 +59,7 @@
                   <button id="cancelSettings">取消</button>
               </div>
           </div>
-          <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; 
+          <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0;
                       background: rgba(0,0,0,0.5); z-index: 9998;"></div>
       `;
 
@@ -84,12 +85,28 @@
   async function callOpenAI(text) {
     const apiUrl = GM_getValue(STORAGE_KEYS.API_URL);
     const apiKey = GM_getValue(STORAGE_KEYS.API_KEY);
-    const prompt = GM_getValue(STORAGE_KEYS.PROMPT);
-    const model = GM_getValue(STORAGE_KEYS.MODEL, DEFAULT_SETTINGS.model);
 
     if (!apiUrl || !apiKey) {
-      throw new Error('请先在设置中配置API地址和密钥');
+      // 创建引导对话框
+      const dialog = createTranslationDialog();
+      document.body.appendChild(dialog);
+      const contentDiv = dialog.querySelector('#translationContent');
+      contentDiv.innerHTML = `
+            <div style="text-align: center; padding: 20px;">
+                <p>您还未配置 API 密钥，请先获取密钥：</p>
+                <p><a href="https://platform.deepseek.com/api_keys"
+                      target="_blank"
+                      style="color: #1DA1F2; text-decoration: none;">
+                    点击这里获取 DeepSeek API 密钥
+                </a></p>
+                <p>获取后请点击"翻译设置"按钮进行配置</p>
+            </div>
+        `;
+      return;
     }
+
+    const prompt = GM_getValue(STORAGE_KEYS.PROMPT);
+    const model = GM_getValue(STORAGE_KEYS.MODEL, DEFAULT_SETTINGS.model);
 
     console.log('开始API调用...');
 
@@ -201,19 +218,19 @@
   function createTranslationDialog() {
     const dialog = document.createElement('div');
     dialog.innerHTML = `
-      <div style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); 
+      <div style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
                   background: white; border-radius: 8px; z-index: 9999;
                   box-shadow: 0 0 10px rgba(0,0,0,0.3); max-width: 80%; min-width: 300px;">
         <!-- 标题栏 -->
-        <div style="padding: 16px 20px; display: flex; justify-content: space-between; 
+        <div style="padding: 16px 20px; display: flex; justify-content: space-between;
                     align-items: center; border-bottom: 1px solid #eee;">
           <h3 style="margin: 0; font-size: 16px; color: #333;">申请中译中！</h3>
-          <button id="closeTranslation" style="border: none; background: none; cursor: pointer; 
+          <button id="closeTranslation" style="border: none; background: none; cursor: pointer;
                                              font-size: 18px; color: #666; padding: 4px 8px;">✕</button>
         </div>
         <!-- 内容区域 -->
         <div style="padding: 20px;">
-          <div id="translationContent" style="margin: 0; line-height: 1.6; font-size: 14px; 
+          <div id="translationContent" style="margin: 0; line-height: 1.6; font-size: 14px;
                                             max-height: 60vh; overflow-y: auto; padding-right: 10px;">
             <div class="loading" style="text-align: center;">
               <span>加载中...</span>
@@ -221,7 +238,7 @@
           </div>
         </div>
       </div>
-      <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; 
+      <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0;
                   background: rgba(0,0,0,0.5); z-index: 9998;"></div>
     `;
 
