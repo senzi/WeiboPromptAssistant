@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         申请微博中译中
-// @namespace    http://tampermonkey.net/
+// @namespace    https://github.com/SomiaWhiteRing/chinese2chinese4weibo
 // @version      0.1
 // @description  将微博内容翻译成更易理解的中文
 // @author       WhiteRing
@@ -207,7 +207,7 @@
         <!-- 标题栏 -->
         <div style="padding: 16px 20px; display: flex; justify-content: space-between; 
                     align-items: center; border-bottom: 1px solid #eee;">
-          <h3 style="margin: 0; font-size: 16px; color: #333;">翻译结果</h3>
+          <h3 style="margin: 0; font-size: 16px; color: #333;">申请中译中！</h3>
           <button id="closeTranslation" style="border: none; background: none; cursor: pointer; 
                                              font-size: 18px; color: #666; padding: 4px 8px;">✕</button>
         </div>
@@ -216,7 +216,7 @@
           <div id="translationContent" style="margin: 0; line-height: 1.6; font-size: 14px; 
                                             max-height: 60vh; overflow-y: auto; padding-right: 10px;">
             <div class="loading" style="text-align: center;">
-              <span>正在连接服务器...</span>
+              <span>加载中...</span>
             </div>
           </div>
         </div>
