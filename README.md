@@ -1,21 +1,27 @@
-# 微博中译中插件
+# WeiboPromptAssistant
 
-一个浏览器插件，可以将微博内容翻译成更易理解的中文表述。
+WeiboPromptAssistant 是一个用于将微博内容转换为 AI 提示词的浏览器插件，方便进行分析、翻译和改写。
 
-![图例](https://p.sda1.dev/20/e132ee06204b5baaa840af87e908953d)
+## 项目来源
+
+本项目 fork 自 [SomiaWhiteRing/chinese2chinese4weibo](https://github.com/SomiaWhiteRing/chinese2chinese4weibo)，并在其基础上进行了优化。
+
+## 优化内容
+
+1. 增加多 Prompt 配置功能。
+2. 新增“一键复制”功能，方便使用。
 
 ## 功能特点
 
-- 在每条微博下方添加"中译中"按钮
-- 支持自定义 AI 接口设置（默认使用 DeepSeek）
-- 实时流式翻译响应
-- 可自定义翻译提示词
+- 在每条微博下方添加“中译中”按钮，支持实时翻译。
+- 支持自定义 AI 接口设置（默认使用 DeepSeek）。
+- 自定义翻译提示词，满足不同需求。
 
 ## 安装方法
 
-1. 安装 Tampermonkey 浏览器扩展
-2. 点击[此处](https://greasyfork.org/zh-CN/scripts/517109-%E7%94%B3%E8%AF%B7%E5%BE%AE%E5%8D%9A%E4%B8%AD%E8%AF%91%E4%B8%AD)安装脚本
-3. 点击微博页面上的"翻译设置"按钮，配置以下信息：
+1. 安装 [Tampermonkey](https://www.tampermonkey.net/) 浏览器扩展。
+2. 点击[此处](https://github.com/senzi/WeiboPromptAssistant/raw/master/WeiboPromptAssistant.user.js)安装脚本。
+3. 进入微博页面，点击微博下方的“功能设置”按钮，配置以下信息：
    - API 地址
    - API Key
    - 模型名称
@@ -23,16 +29,16 @@
 
 ## 使用说明
 
-1. 打开任意微博详情页
-2. 点击"中译中"按钮即可查看翻译结果
-3. 可通过"翻译设置"按钮随时调整配置
+1. 打开任意微博详情页。
+2. 点击“中译中”按钮查看翻译结果。
+3. 随时通过“功能设置”按钮调整配置。
 
 ## 注意事项
 
-- 需要自备 AI API 密钥
-- 默认配置适用于 DeepSeek API
-- 建议根据个人需求调整提示词以获得最佳翻译效果
+- 需要自备 AI API 密钥。
+- 默认配置适用于 DeepSeek API。
+- 建议根据个人需求调整提示词以获得最佳翻译效果。
 
 ## 开源协议
 
-MIT License
+本项目遵循 MIT License 开源协议。
